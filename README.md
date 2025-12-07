@@ -1,6 +1,6 @@
-# Restores the Occluded Regions in a Disparity Map
+# Restores the Occluded Regions of a Disparity Map
 Most basic or traditional stereo-matching algorithms generate disparity maps without explicitly modeling or handling occluded pixels, which often leads to unreliable estimates in occluded regions.
-This program, takes a disparity map and tries to find occluded regions and creates a new disparity map that displays the occluded pixels in black.
+This program, tries to find the occluded regions in a disparity map and creates a new disparity map that displays the occluded pixels in black.
 
 ## Input Image
 The disparity map that used as input.
