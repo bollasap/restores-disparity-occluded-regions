@@ -20,21 +20,21 @@ The disparity map with occluded regions that created at the output.
 In the same way, the following ground truth disparity maps between two Tsukuba image views have been created.
 
 <p align="center">
-  <img src="tsukuba_gt_view3_view1.png"> 
+  <img src="tsukuba_gt_view3_view1.png"><br>
+  reference image = right, disparity levels = 32
 </p>
-disparity levels = 32, reference image = right
 
 <p align="center">
-  <img src="tsukuba_gt_view3_view2.png"> 
+  <img src="tsukuba_gt_view3_view2.png"><br>
+  reference image = right, disparity levels = 16
 </p>
-disparity levels = 16, reference image = right
 
 <p align="center">
-  <img src="tsukuba_gt_view3_view4.png"> 
+  <img src="tsukuba_gt_view3_view4.png"><br>
+  reference image = left, disparity levels = 16
 </p>
-disparity levels = 16, reference image = left
 
 <p align="center">
-  <img src="tsukuba_gt_view3_view5.png"> 
+  <img src="tsukuba_gt_view3_view5.png"><br>
+  reference image = left, disparity levels = 32
 </p>
-disparity levels = 32, reference image = left
