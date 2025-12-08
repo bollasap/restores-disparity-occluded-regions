@@ -17,7 +17,12 @@ The disparity map with occluded regions that created at the output.
 </p>
 
 ## Tsukuba Ground Truth
-In the same way, the following ground truth disparity maps between two Tsukuba views have been created.
+Similarly, the following disparity maps have been created. Each one represents the ground truth between two Tsukuba views.
+
+<p align="center">
+  <img src="tsukuba_gt_view3.png"><br>
+  Tsukuba ground truth for view 3 that used as input
+</p>
 
 <p align="center">
   <img src="tsukuba_gt_view3_view1.png"><br>
