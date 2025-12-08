@@ -12,49 +12,55 @@ disparityMap = double(disparityIn)/scaleFactor;
 % Get the image size
 [rows,cols] = size(disparityIn);
 
-if (strcmp(referenceImage,'left') && strcmp(occludedArea,'inside')) || (strcmp(referenceImage,'right') && strcmp(occludedArea,'outside'))
-    % Left to right scan
+if strcmp(referenceImage,'left') && strcmp(occludedArea,'inside')
     for y = 1:rows
         pixel0 = disparityMap(y,1);
-        for x = 2:cols
+        for x = 2:cols %left to right scan
             pixel1 = disparityMap(y,x);
-            if strcmp(referenceImage,'left') %left/inside
-                if pixel0 >= pixel1
-                    pixel0 = pixel1;
-                else
-                    disparityMap(y,x) = 0;
-                    pixel0 = pixel0+1;
-                end
-            else %right/outside
-                if pixel0 <= pixel1
-                    pixel0 = pixel1;
-                else
-                    disparityMap(y,x) = 0;
-                    pixel0 = pixel0-1;
-                end
+            if pixel0 >= pixel1
+                pixel0 = pixel1;
+            else
+                disparityMap(y,x) = 0;
+                pixel0 = pixel0+1;
             end
         end
     end
-else
-    % Right to left scan
+elseif strcmp(referenceImage,'right') && strcmp(occludedArea,'outside')
+    for y = 1:rows
+        pixel0 = disparityMap(y,1);
+        for x = 2:cols %left to right scan
+            pixel1 = disparityMap(y,x);
+            if pixel0 <= pixel1
+                pixel0 = pixel1;
+            else
+                disparityMap(y,x) = 0;
+                pixel0 = pixel0-1;
+            end
+        end
+    end
+elseif strcmp(referenceImage,'left') && strcmp(occludedArea,'outside')
     for y = 1:rows
         pixel0 = disparityMap(y,cols);
-        for x = cols-1:-1:1
+        for x = cols-1:-1:1 %right to left scan
             pixel1 = disparityMap(y,x);
-            if strcmp(referenceImage,'left') %left/outside
-                if pixel0 <= pixel1
-                    pixel0 = pixel1;
-                else
-                    disparityMap(y,x) = 0;
-                    pixel0 = pixel0-1;
-                end
-            else %right/inside
-                if pixel0 >= pixel1
-                    pixel0 = pixel1;
-                else
-                    disparityMap(y,x) = 0;
-                    pixel0 = pixel0+1;
-                end
+            if pixel0 <= pixel1
+                pixel0 = pixel1;
+            else
+                disparityMap(y,x) = 0;
+                pixel0 = pixel0-1;
+            end
+        end
+    end
+elseif strcmp(referenceImage,'right') && strcmp(occludedArea,'inside')
+    for y = 1:rows
+        pixel0 = disparityMap(y,cols);
+        for x = cols-1:-1:1 %right to left scan
+            pixel1 = disparityMap(y,x);
+            if pixel0 >= pixel1
+                pixel0 = pixel1;
+            else
+                disparityMap(y,x) = 0;
+                pixel0 = pixel0+1;
             end
         end
     end
