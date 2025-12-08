@@ -1,6 +1,6 @@
 dispLevels = 16;
 referenceImage = 'left'; %or 'right'
-rightToLeftScan = false;
+occludedArea = 'inside'; %or 'outside'
 
 % Read the (grayscale) disparity image
 disparityIn = imread('disparity.png');
@@ -12,20 +12,20 @@ disparityMap = double(disparityIn)/scaleFactor;
 % Get the image size
 [rows,cols] = size(disparityIn);
 
-% Left to right scan
-if rightToLeftScan == false
+if (strcmp(referenceImage,'left') && strcmp(occludedArea,'inside')) || (strcmp(referenceImage,'right') && strcmp(occludedArea,'outside'))
+    % Left to right scan
     for y = 1:rows
         pixel0 = disparityMap(y,1);
         for x = 2:cols
             pixel1 = disparityMap(y,x);
-            if strcmp(referenceImage,'left')
+            if strcmp(referenceImage,'left') %left/inside
                 if pixel0 >= pixel1
                     pixel0 = pixel1;
                 else
                     disparityMap(y,x) = 0;
                     pixel0 = pixel0+1;
                 end
-            else
+            else %right/outside
                 if pixel0 <= pixel1
                     pixel0 = pixel1;
                 else
@@ -35,22 +35,20 @@ if rightToLeftScan == false
             end
         end
     end
-end
-
-% Right to left scan
-if rightToLeftScan == true
+else
+    % Right to left scan
     for y = 1:rows
         pixel0 = disparityMap(y,cols);
         for x = cols-1:-1:1
             pixel1 = disparityMap(y,x);
-            if strcmp(referenceImage,'left')
+            if strcmp(referenceImage,'left') %left/outside
                 if pixel0 <= pixel1
                     pixel0 = pixel1;
                 else
                     disparityMap(y,x) = 0;
                     pixel0 = pixel0-1;
                 end
-            else
+            else %right/inside
                 if pixel0 >= pixel1
                     pixel0 = pixel1;
                 else
